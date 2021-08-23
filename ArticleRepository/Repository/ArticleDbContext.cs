@@ -8,15 +8,10 @@ namespace ArticleRepository.Repository
         public DbSet<ArticleEntity> Article { get; set; }
         public DbSet<AuthorEntity> Author { get; set; }
 
-
-        public ArticleDbContext()
+        public ArticleDbContext(DbContextOptions<ArticleDbContext> options)
+            : base(options)
         {
-            Database.EnsureCreated();
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=.\\sqlexpress;Database=Article;Trusted_Connection=True;");
+            Database.EnsureCreated();   // создаем базу данных при первом обращении
         }
     }
 }

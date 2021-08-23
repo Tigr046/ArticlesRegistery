@@ -11,7 +11,7 @@ namespace ArticleRepository.Mapping
     {
         public ArticleMappingProfile()
         {
-            CreateMap<ArticleEntity, ArticleDTO>().ForMember(zxc => zxc.Text,conf => conf.Ignore()) ;
+            CreateMap<ArticleEntity, ArticleDTO>();
             CreateMap<ArticleDTO, ArticleEntity>();
 
             CreateMap<AuthorEntity, AuthorDTO>();

@@ -16,7 +16,7 @@ namespace Articles.Controllers.Article
         }
         public IActionResult Index()
         {
-            
+            var a = service.GetArticle(2);
             return View();
         }
     }
