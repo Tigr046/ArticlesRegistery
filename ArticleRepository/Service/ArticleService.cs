@@ -1,4 +1,5 @@
 ﻿using ArticleRepository.DTO;
+using ArticleRepository.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,6 @@ namespace ArticleRepository.Service
         public ArticleDTO GetArticle(int id);
         public AuthorDTO GetAuthor(int id);
 
-        public IQueryable<ArticleDTO> GetAllArticle();
+        public IQueryable<ArticleEntity> GetAllArticle();
     }
 }

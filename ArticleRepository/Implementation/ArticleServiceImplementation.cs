@@ -21,9 +21,9 @@ namespace ArticleRepository.Implementation
             this.mapper = mapper;
         }
 
-        public IQueryable<ArticleDTO> GetAllArticle()
+        public IQueryable<ArticleEntity> GetAllArticle()
         {
-            return mapper.Map<IQueryable<ArticleEntity>, IQueryable<ArticleDTO>>(context.Article.AsQueryable());
+            return context.Article.Include(zxc => zxc.Author).AsQueryable();
         }
 
         public ArticleDTO GetArticle(int id)

@@ -1,0 +1,14 @@
+﻿
+@model ArticleViewModel
+@{
+    ViewData["Title"] = $"Статья: {Model.Title}";
+}
+<article class="blog-post">
+    <h2 class="blog-post-title">@Model.Title</h2>
+    <p class="blog-post-meta">Дата написания @Model.CreationDate.ToString("dd MMM yyyy HH:mm:ss")</p>
+    <p class="blog-post-meta">Автор статьи @Model.AuthorName</p>   
+    <p>@Model.Text</p>
+    @if (Model.CanBeUpdated) { 
+        <span class="navbar-toggler-icon"><a>Изменить</a></span>
+    }
+</article>

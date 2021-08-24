@@ -14,5 +14,9 @@ namespace Articles.Models
         public string Text { get; set; }
 
         public AuthorViewModel Author { get; set; }
+        public DateTime CreationDate { get; set; }
+        public string AuthorName => $"{Author.SecondName} {Author.FirstName[0]}.{Author.Patronymic[0]}.";
+
+        public bool CanBeUpdated { get; set; }
     }
 }
