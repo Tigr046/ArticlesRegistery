@@ -49,10 +49,14 @@
 <article id="articleViewForm" class="blog-post">
     <h2 class="blog-post-title">@Model.Title</h2>
     <p class="blog-post-meta">Дата написания @Model.CreationDate.ToString("dd MMM yyyy HH:mm:ss")</p>
+    @if (Model.LastUpdateDate.HasValue)
+    {
+        <p class="blog-post-meta">Дата последнего обновлаения @Model.LastUpdateDate.Value.ToString("dd MMM yyyy HH:mm:ss")</p>
+    }
     <p class="blog-post-meta">Автор статьи @Model.AuthorName</p>
     <p>@Model.Text</p>
     @if (Model.CanBeUpdated)
     {
-        <img id="updateButton" src="~/img/gear.svg"/>
+        <img id="updateButton" src="~/img/gear.svg" />
     }
 </article>

@@ -12,7 +12,7 @@ namespace ArticleRepository.Mapping
         public ArticleMappingProfile()
         {
             CreateMap<ArticleEntity, ArticleDTO>();
-            CreateMap<ArticleDTO, ArticleEntity>();
+            CreateMap<ArticleDTO, ArticleEntity>().ForMember(x => x.LastUpdateDate, opt => opt.MapFrom(src => DateTime.Now));
 
             CreateMap<AuthorEntity, AuthorDTO>();
             CreateMap<AuthorDTO, AuthorEntity>();

@@ -22,6 +22,8 @@ namespace Articles.Models
 
         public DateTime CreationDate { get; set; }
 
+        public DateTime? LastUpdateDate { get; set; }
+
         public string AuthorName => $"{Author.SecondName} {Author.FirstName[0]}.{Author.Patronymic[0]}.";
 
         public bool CanBeUpdated { get; set; }

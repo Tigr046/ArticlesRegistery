@@ -17,5 +17,7 @@ namespace ArticleRepository.DTO
         public int AuthorId { get; set; }
 
         public DateTime CreationDate { get; set; }
+
+        public DateTime? LastUpdateDate { get; set; }
     }
 }

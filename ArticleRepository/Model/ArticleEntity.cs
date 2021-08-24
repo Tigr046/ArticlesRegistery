@@ -17,5 +17,7 @@ namespace ArticleRepository.Model
         public AuthorEntity Author { get; set; }
         public int AuthorId { get; set; }
         public DateTime CreationDate { get; set; }
+
+        public DateTime? LastUpdateDate { get; set; }
     }
 }
