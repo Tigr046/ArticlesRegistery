@@ -21,9 +21,11 @@ namespace ArticleRepository.Implementation
             this.mapper = mapper;
         }
 
-        public IQueryable<ArticleEntity> GetAllArticle()
+        public List<ArticleDTO> GetArticleByPageNumberAndPageSize(int pageNumber, int pageSize)
         {
-            return context.Article.Include(zxc => zxc.Author).AsQueryable();
+            int skipItemCount = pageSize * pageNumber - 1 < 0 ? 0 : pageSize * pageNumber - 1;
+            return mapper.Map<List<ArticleEntity>, List<ArticleDTO>>(
+                context.Article.Include(zxc => zxc.Author).AsQueryable().Skip(skipItemCount).Take(pageSize).ToList());
         }
 
         public ArticleDTO GetArticle(int id)

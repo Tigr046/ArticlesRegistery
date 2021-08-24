@@ -12,6 +12,6 @@ namespace ArticleRepository.Service
         public ArticleDTO GetArticle(int id);
         public AuthorDTO GetAuthor(int id);
 
-        public IQueryable<ArticleEntity> GetAllArticle();
+        public List<ArticleDTO> GetArticleByPageNumberAndPageSize(int pageNumber, int pageSize);
     }
 }

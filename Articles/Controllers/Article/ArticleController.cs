@@ -23,7 +23,7 @@ namespace Articles.Controllers.Article
         {
             return View(new ArticleRegisterModel()
             {
-                Articles = mapper.Map<List<ArticleEntity>, List<ArticleViewModel>>(service.GetAllArticle().ToList())
+                Articles = mapper.Map<List<ArticleDTO>, List<ArticleViewModel>>(service.GetArticleByPageNumberAndPageSize(0,10))
             }); ;
         }
 

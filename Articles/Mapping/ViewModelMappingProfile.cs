@@ -18,12 +18,6 @@ namespace Articles.Mapping
 
             CreateMap<AuthorViewModel, AuthorDTO>();
             CreateMap<AuthorDTO, AuthorViewModel>();
-
-            CreateMap<ArticleEntity, ArticleViewModel>();
-            CreateMap<ArticleViewModel, ArticleEntity>();
-
-            CreateMap<AuthorEntity, AuthorViewModel>();
-            CreateMap<AuthorViewModel, AuthorEntity>();
         }
     }
 }
