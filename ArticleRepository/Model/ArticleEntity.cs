@@ -16,6 +16,6 @@ namespace ArticleRepository.Model
         [ForeignKey("AuthorId")]
         public AuthorEntity Author { get; set; }
         public int AuthorId { get; set; }
-
+        public DateTime CreationDate { get; set; }
     }
 }
