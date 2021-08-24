@@ -3,12 +3,46 @@
 @{
     ViewData["Title"] = $"Статья: {Model.Title}";
 }
-<article class="blog-post">
+@section scripts{ 
+    <script>
+        $(document).ready(function () {
+            $("#updateButton").click(function () {
+                $.ajax({
+                    url: '@Url.Action("CanBeUpdated", "Article")',
+                    data: 'id=@Model.Id',
+                    success: function (a) {
+                        $('#articleViewForm').hide();
+                        $("#formForUpdateArticle").toggleClass("d-none");
+
+
+                    }
+                })
+            })
+
+        })
+    </script>
+}
+<div id="formForUpdateArticle" class="d-none">
+    @using (Html.BeginForm("UpdateArticle", "Article", FormMethod.Post))
+    {
+        @Html.HiddenFor(x => x.Id)
+        <div class="form-group">
+            @Html.LabelFor(x => x.Title, new { @for = "Title" })
+            @Html.TextAreaFor(x => x.Title, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.Text,new { @for = "Text" })
+            @Html.TextAreaFor(x => x.Text,new { @class = "form-control"})
+        </div>       
+    }
+</div>
+<article id="articleViewForm" class="blog-post">
     <h2 class="blog-post-title">@Model.Title</h2>
     <p class="blog-post-meta">Дата написания @Model.CreationDate.ToString("dd MMM yyyy HH:mm:ss")</p>
-    <p class="blog-post-meta">Автор статьи @Model.AuthorName</p>   
+    <p class="blog-post-meta">Автор статьи @Model.AuthorName</p>
     <p>@Model.Text</p>
-    @if (Model.CanBeUpdated) { 
-        <span class="navbar-toggler-icon"><a>Изменить</a></span>
+    @if (Model.CanBeUpdated)
+    {
+        <img id="updateButton" src="~/img/gear.svg"/>
     }
 </article>

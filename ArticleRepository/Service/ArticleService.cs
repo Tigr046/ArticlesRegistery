@@ -13,5 +13,9 @@ namespace ArticleRepository.Service
         public AuthorDTO GetAuthor(int id);
 
         public List<ArticleDTO> GetArticleByPageNumberAndPageSize(int pageNumber, int pageSize);
+
+        public bool ArticleExists(int id);
+
+        public ArticleDTO UpdateArticle(ArticleDTO articleToUpdate);
     }
 }

@@ -1,12 +1,10 @@
 ﻿using ArticleRepository.DTO;
-using ArticleRepository.Model;
 using ArticleRepository.Service;
 using Articles.Models;
 using Articles.Models.RegisterModel;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Articles.Controllers.Article
 {
@@ -32,6 +30,23 @@ namespace Articles.Controllers.Article
             ArticleViewModel article = mapper.Map<ArticleDTO, ArticleViewModel>(service.GetArticle(id));
             article.CanBeUpdated = true;
             return View(article);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateArticle(ArticleViewModel articleViewModel)
+        {
+            if (service.ArticleExists(articleViewModel.Id))
+            {
+                service.UpdateArticle(
+                    mapper.Map<ArticleViewModel, ArticleDTO>(articleViewModel));
+                return RedirectToAction("View", articleViewModel.Id);
+            }
+            throw new System.Exception($"Статья с id {articleViewModel.Id} не существует.");
+        }
+
+        public JsonResult CanBeUpdated(int id)
+        {
+            return Json(true);
         }
     }
 }

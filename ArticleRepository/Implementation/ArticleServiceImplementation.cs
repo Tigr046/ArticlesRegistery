@@ -45,5 +45,15 @@ namespace ArticleRepository.Implementation
             else
                 throw new Exception();
         }
+
+        public bool ArticleExists(int id) => context.Article.Any(x => x.Id == id);
+
+        public ArticleDTO UpdateArticle(ArticleDTO articleToUpdate)
+        {
+            ArticleEntity updatingArticle = context.Article.FirstOrDefault(x => x.Id == articleToUpdate.Id);
+            mapper.Map(articleToUpdate, updatingArticle);
+            context.SaveChanges();
+            return mapper.Map<ArticleEntity, ArticleDTO>(updatingArticle);
+        }
     }
 }
