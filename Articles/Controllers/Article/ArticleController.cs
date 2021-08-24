@@ -39,7 +39,7 @@ namespace Articles.Controllers.Article
             {
                 service.UpdateArticle(
                     mapper.Map<ArticleViewModel, ArticleDTO>(articleViewModel));
-                return RedirectToAction("View", articleViewModel.Id);
+                return RedirectToAction("View", new { id = articleViewModel.Id });
             }
             throw new System.Exception($"Статья с id {articleViewModel.Id} не существует.");
         }
