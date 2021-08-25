@@ -38,6 +38,15 @@ namespace Articles.Controllers.Article
             return View(article);
         }
 
+        public IActionResult UpdateArticleFromView(int id)
+        {
+            if (service.ArticleExists(id))
+            {
+                return PartialView("Update", mapper.Map<ArticleDTO, ArticleViewModel>(service.GetArticle(id)));
+            }
+            throw new System.Exception($"Статья с id {id} не существует.");
+        }
+
         [HttpPost]
         public IActionResult UpdateArticle(ArticleViewModel articleViewModel)
         {
