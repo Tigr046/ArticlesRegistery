@@ -30,20 +30,22 @@
     {
         @Html.HiddenFor(x => x.Id)
         @Html.HiddenFor(x => x.AuthorId)
+        @Html.HiddenFor(x => x.CreationDate)
+
         <div class="form-group">
             @Html.LabelFor(x => x.Title, new { @for = "Title" })
             @Html.TextAreaFor(x => x.Title, new { @class = "form-control" })
         </div>
         <div class="form-group">
-            @Html.LabelFor(x => x.Text,new { @for = "Text" })
-            @Html.TextAreaFor(x => x.Text,new { @class = "form-control"})
+            @Html.LabelFor(x => x.Text, new { @for = "Text" })
+            @Html.TextAreaFor(x => x.Text, new { @class = "form-control" })
         </div>
-        
+
         <div class="btn-group">
             <a id="refreshPage" class="btn btn-link">Назад</a>
             <button type="submit" class="btn btn-link">Сохранить</button>
         </div>
-        
+
     }
 </div>
 <article id="articleViewForm" class="blog-post">

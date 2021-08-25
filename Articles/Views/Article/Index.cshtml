@@ -1,18 +1,36 @@
 ﻿@{
     ViewData["Title"] = "Статьи";
 }
-@model ArticleRegisterModel
-<div class="row">
-    @foreach (ArticleViewModel article in Model.Articles)
-    {
-        <div class="col-5 col-xs-12 p-6 mr-1 p-md-5 mb-4 text-white rounded bg-dark">
-            <div class="px-0">
-                <h4 class="display-6 fst-italic">@article.Title</h4>
-            </div>
-            <p class="card-text">
-                Автор: @article.AuthorName
-            </p>
-            <p class="lead mb-0"><a asp-controller="Article" asp-action="View" asp-route-id="@article.Id" class="text-white fw-bold">Подробнее</a></p>
-        </div>
-    }
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            fillArticleViewPage(0,10)
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                    setTimeout(() => {
+                        fillArticleViewPage(Number($("#PageNumber").val()), Number($("#PageSize").val()) + 10)
+                    }, 500);
+                    
+                }
+            });
+        })
+        function fillArticleViewPage(pageNumber, pageSize) {
+            $.ajax({
+                url: '@Url.Action("Read", "Article")',
+                data: { pageNumber: pageNumber, pageSize: pageSize },
+                success: function (view) {
+                    $("#articleViewDiv").html(view)
+                    $("#PageNumber").val(pageNumber)
+                    $("#PageSize").val(pageSize)
+
+                }
+                })
+        }
+    </script>
+}
+@Html.Hidden("PageNumber")
+@Html.Hidden("PageSize")
+
+<div id="articleViewDiv" class="row">
+
 </div>

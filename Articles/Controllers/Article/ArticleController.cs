@@ -19,10 +19,16 @@ namespace Articles.Controllers.Article
         }
         public IActionResult Index()
         {
-            return View(new ArticleRegisterModel()
-            {
-                Articles = mapper.Map<List<ArticleDTO>, List<ArticleViewModel>>(service.GetArticleByPageNumberAndPageSize(0,10))
-            }); ;
+            return View(); ;
+        }
+
+        public IActionResult Read(int pageNumber, int pageSize)
+        {
+            return PartialView("_ArticleView",
+                new ArticleRegisterModel()
+                {
+                    Articles = mapper.Map<List<ArticleDTO>, List<ArticleViewModel>>(service.GetArticleByPageNumberAndPageSize(pageNumber, pageSize))
+                });
         }
 
         public IActionResult View(int id)
