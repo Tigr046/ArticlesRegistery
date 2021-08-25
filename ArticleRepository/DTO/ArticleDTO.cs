@@ -12,7 +12,7 @@ namespace ArticleRepository.DTO
 
         public string Text { get; set; }
 
-        public AuthorDTO Author { get; set; }
+        public UserDTO Author { get; set; }
 
         public int AuthorId { get; set; }
 

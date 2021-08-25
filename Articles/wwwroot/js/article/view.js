@@ -9,7 +9,7 @@
                 $("#formForUpdateArticle").toggleClass("d-none");
                 $("#formForUpdateArticle").html(view);
 
-                $('#refreshPage').click(function () {
+                $('#backButton').click(function () {
                     location.reload();
                 })
             }

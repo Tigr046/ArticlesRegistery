@@ -16,7 +16,7 @@ namespace Articles.Models
         [Display(Name = "Текст статьи")]
         public string Text { get; set; }
 
-        public AuthorViewModel Author { get; set; }
+        public UserViewModel Author { get; set; }
 
         public int AuthorId { get; set; }
 

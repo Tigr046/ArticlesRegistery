@@ -6,25 +6,17 @@ using System.Text;
 
 namespace ArticleRepository.Model
 {
-    public class ArticleEntity
+    public class Comments
     {
         public int Id { get; set; }
 
-        [Required]
-        public string Title { get; set; }
-
-        [Required]
+        [StringLength(220)]
         public string Text { get; set; }
 
         [ForeignKey("AuthorId")]
         public UserEntity Author { get; set; }
 
-        [Required]
         public int AuthorId { get; set; }
 
-        [Required]
-        public DateTime CreationDate { get; set; }
-
-        public DateTime? LastUpdateDate { get; set; }
     }
 }

@@ -16,8 +16,8 @@ namespace Articles.Mapping
             CreateMap<ArticleViewModel, ArticleDTO>();
             CreateMap<ArticleDTO, ArticleViewModel>();
 
-            CreateMap<AuthorViewModel, AuthorDTO>();
-            CreateMap<AuthorDTO, AuthorViewModel>();
+            CreateMap<UserViewModel, UserDTO>();
+            CreateMap<UserDTO, UserViewModel>();
         }
     }
 }

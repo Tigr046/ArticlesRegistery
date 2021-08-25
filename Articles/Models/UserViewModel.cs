@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace ArticleRepository.DTO
+namespace Articles.Models
 {
-    public class AuthorDTO
+    public class UserViewModel
     {
         public int Id { get; set; }
 
@@ -13,7 +14,7 @@ namespace ArticleRepository.DTO
         public string SecondName { get; set; }
 
         public string Patronymic { get; set; }
-
+        
         public DateTime CreationDate { get; set; }
     }
 }

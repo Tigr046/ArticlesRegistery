@@ -37,11 +37,11 @@ namespace ArticleRepository.Implementation
                 throw new Exception();
         }
 
-        public AuthorDTO GetAuthor(int id)
+        public UserDTO GetAuthor(int id)
         {
-            AuthorEntity authorToGet = context.Author.FirstOrDefault(zxc => zxc.Id == id);
+            UserEntity authorToGet = context.User.FirstOrDefault(zxc => zxc.Id == id);
             if (authorToGet != null)
-                return mapper.Map<AuthorEntity, AuthorDTO>(authorToGet);
+                return mapper.Map<UserEntity, UserDTO>(authorToGet);
             else
                 throw new Exception();
         }

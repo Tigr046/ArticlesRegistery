@@ -6,7 +6,7 @@ namespace ArticleRepository.Repository
     public class ArticleDbContext : DbContext
     {
         public DbSet<ArticleEntity> Article { get; set; }
-        public DbSet<AuthorEntity> Author { get; set; }
+        public DbSet<UserEntity> User { get; set; }
 
         public ArticleDbContext(DbContextOptions<ArticleDbContext> options)
             : base(options)

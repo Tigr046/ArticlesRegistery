@@ -14,8 +14,8 @@ namespace ArticleRepository.Mapping
             CreateMap<ArticleEntity, ArticleDTO>();
             CreateMap<ArticleDTO, ArticleEntity>().ForMember(x => x.LastUpdateDate, opt => opt.MapFrom(src => DateTime.Now));
 
-            CreateMap<AuthorEntity, AuthorDTO>();
-            CreateMap<AuthorDTO, AuthorEntity>();
+            CreateMap<UserEntity, UserDTO>();
+            CreateMap<UserDTO, UserEntity>();
 
         }
     }
