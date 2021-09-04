@@ -19,5 +19,8 @@ namespace ArticleRepository.DTO
         public DateTime CreationDate { get; set; }
 
         public DateTime? LastUpdateDate { get; set; }
+
+
+        public List<CommentDTO> Comments { get; set; }
     }
 }

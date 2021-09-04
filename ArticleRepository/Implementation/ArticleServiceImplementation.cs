@@ -55,5 +55,10 @@ namespace ArticleRepository.Implementation
             context.SaveChanges();
             return mapper.Map<ArticleEntity, ArticleDTO>(updatingArticle);
         }
+
+        public List<CommentDTO> GetCommentsByArticleId(int articleId)
+        {
+            return mapper.Map<List<CommentEntity>, List<CommentDTO>>(context.Comment.Include(x => x.Author).Where(x => x.ArticleId == articleId).ToList());
+        }
     }
 }

@@ -2,13 +2,16 @@
 
 @foreach (ArticleViewModel article in Model.Articles)
 {
-    <div class="col-5 col-xs-12 p-6 mr-1 p-md-5 mb-4 text-white rounded bg-dark">
-        <div class="px-0">
+    
+    <div class="row p-6 mr-1 p-md-5 mb-4 card text-white rounded bg-dark">
+        <div class="px-1 card-body">
             <h4 class="display-6 fst-italic">@article.Title</h4>
         </div>
-        <p class="card-text">
-            Автор: @article.AuthorName
-        </p>
-        <p class="lead mb-0"><a asp-controller="Article" asp-action="View" asp-route-id="@article.Id" class="text-white fw-bold">Подробнее</a></p>
-    </div>
+        <div class="card-footer">
+            <p class="card-text">
+                Автор: @article.Author.UserName
+            </p>
+            <p class="lead mb-0"><a asp-controller="Article" asp-action="View" asp-route-id="@article.Id" class="text-white fw-bold">Подробнее</a></p>
+        </div>
+        </div>
 }

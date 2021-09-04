@@ -24,8 +24,9 @@ namespace Articles.Models
 
         public DateTime? LastUpdateDate { get; set; }
 
-        public string AuthorName => $"{Author.SecondName} {Author.FirstName[0]}.{Author.Patronymic[0]}.";
-
         public bool CanBeUpdated { get; set; }
+
+        public List<CommentViewModel> Comments { get; set; }
+
     }
 }

@@ -22,5 +22,7 @@ namespace ArticleRepository.Model
 
         [Required]
         public DateTime CreationDate { get; set; }
+
+        public virtual List<CommentEntity> Comments { get; set; }
     }
 }

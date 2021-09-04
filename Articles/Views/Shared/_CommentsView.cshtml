@@ -1,0 +1,9 @@
+﻿@model List<CommentViewModel>
+
+@foreach(CommentViewModel comment in Model)
+{
+    <div class="card col-12 mt-1">
+        <p>@comment.Author.UserName @comment.CreationDate.ToString("dd MMM yyyy HH:mm")</p>
+        <p>@comment.Text</p>
+    </div>
+}

@@ -18,6 +18,9 @@ namespace Articles.Mapping
 
             CreateMap<UserViewModel, UserDTO>();
             CreateMap<UserDTO, UserViewModel>();
+
+            CreateMap<CommentViewModel, CommentDTO>();
+            CreateMap<CommentDTO, CommentViewModel>();
         }
     }
 }

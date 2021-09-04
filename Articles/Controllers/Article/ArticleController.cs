@@ -63,5 +63,10 @@ namespace Articles.Controllers.Article
         {
             return Json(true);
         }
+
+        public IActionResult ShowComments(int articleId)
+        {
+            return PartialView("_CommentsView", mapper.Map<List<CommentDTO>, List<CommentViewModel>>(service.GetCommentsByArticleId(articleId)));
+        }
     }
 }

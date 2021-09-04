@@ -15,5 +15,8 @@ namespace ArticleRepository.DTO
         public string Patronymic { get; set; }
 
         public DateTime CreationDate { get; set; }
+
+        public List<CommentDTO> Comments { get; set; }
+
     }
 }

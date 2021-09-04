@@ -12,15 +12,19 @@
 </div>
 <article id="articleViewForm" class="blog-post">
     <h2 class="blog-post-title">@Model.Title</h2>
-    <p class="blog-post-meta">Дата написания @Model.CreationDate.ToString("dd MMM yyyy HH:mm:ss")</p>
+    <p class="blog-post-meta">Дата написания @Model.CreationDate.ToString("dd MMM yyyy HH:mm")</p>
     @if (Model.LastUpdateDate.HasValue)
     {
-        <p class="blog-post-meta">Дата последнего обновлаения @Model.LastUpdateDate.Value.ToString("dd MMM yyyy HH:mm:ss")</p>
+        <p class="blog-post-meta">Дата последнего обновлаения @Model.LastUpdateDate.Value.ToString("dd MMM yyyy HH:mm")</p>
     }
-    <p class="blog-post-meta">Автор статьи @Model.AuthorName</p>
+    <p class="blog-post-meta">Автор статьи @Model.Author.UserName</p>
     <p>@Model.Text</p>
     @if (Model.CanBeUpdated)
     {
         <img id="updateButton" src="~/img/gear.svg" />
     }
+    <div id="commentsContainer" class="mt-2 container-fluid">
+        <button id="commentToShow" class="w-100 btn btn-dark">Комментарии</button>
+        <div id="commentsView" commentsHidden ="true" class="w-100"></div>
+    </div>
 </article>

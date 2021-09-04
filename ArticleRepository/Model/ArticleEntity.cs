@@ -26,5 +26,8 @@ namespace ArticleRepository.Model
         public DateTime CreationDate { get; set; }
 
         public DateTime? LastUpdateDate { get; set; }
+
+        public virtual List<CommentEntity> Comments { get; set; }
+
     }
 }

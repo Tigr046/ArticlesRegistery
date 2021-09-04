@@ -17,6 +17,9 @@ namespace ArticleRepository.Mapping
             CreateMap<UserEntity, UserDTO>();
             CreateMap<UserDTO, UserEntity>();
 
+            CreateMap<CommentEntity, CommentDTO>();
+            CreateMap<CommentDTO, CommentEntity>();
+
         }
     }
 }
