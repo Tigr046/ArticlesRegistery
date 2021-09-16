@@ -17,20 +17,7 @@ namespace Articles.Controllers.Article
             service = articleService;
             this.mapper = mapper;
         }
-        public IActionResult Index()
-        {
-            return View(); ;
-        }
-
-        public IActionResult Read(int pageNumber, int pageSize)
-        {
-            return PartialView("_ArticleView",
-                new ArticleRegisterModel()
-                {
-                    Articles = mapper.Map<List<ArticleDTO>, List<ArticleViewModel>>(service.GetArticleByPageNumberAndPageSize(pageNumber, pageSize))
-                });
-        }
-
+        
         public IActionResult View(int id)
         {
             ArticleViewModel article = mapper.Map<ArticleDTO, ArticleViewModel>(service.GetArticle(id));

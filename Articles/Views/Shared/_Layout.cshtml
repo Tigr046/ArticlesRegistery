@@ -21,7 +21,11 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Главная страница</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Article" asp-action="Index">Статьи</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="ArticleRegister" asp-action="Index">Статьи</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="ArticleRegister" asp-action="Index">Уведомления (<div id="UnreadedNotice" class="text-danger">)</div></a>
+
                         </li>
                     </ul>
                 </div>
@@ -33,9 +37,9 @@
             @RenderBody()
         </main>
     </div>
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/shared/_layout.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

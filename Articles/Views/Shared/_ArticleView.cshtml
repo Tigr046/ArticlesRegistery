@@ -1,5 +1,4 @@
 ﻿@model ArticleRegisterModel
-
 @foreach (ArticleViewModel article in Model.Articles)
 {
     
@@ -11,7 +10,7 @@
             <p class="card-text">
                 Автор: @article.Author.UserName
             </p>
-            <p class="lead mb-0"><a asp-controller="Article" asp-action="View" asp-route-id="@article.Id" class="text-white fw-bold">Подробнее</a></p>
+            <p class="lead mb-0"><a asp-controller="ArticleRegister" asp-action="View" asp-route-id="@article.Id" class="text-white fw-bold">Подробнее</a></p>
         </div>
         </div>
 }

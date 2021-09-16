@@ -11,7 +11,7 @@
 })
 function fillArticleViewPage(pageNumber, pageSize) {
     $.ajax({
-        url: '/Article/Read',
+        url: '/ArticleRegister/Read',
         data: { pageNumber: pageNumber, pageSize: pageSize },
         success: function (view) {
             $("#articleViewDiv").html(view)
