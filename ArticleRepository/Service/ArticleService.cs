@@ -17,7 +17,6 @@ namespace ArticleRepository.Service
         public bool ArticleExists(int id);
 
         public ArticleDTO UpdateArticle(ArticleDTO articleToUpdate);
-        public List<CommentDTO> GetCommentsByArticleId(int articleId);
 
     }
 }

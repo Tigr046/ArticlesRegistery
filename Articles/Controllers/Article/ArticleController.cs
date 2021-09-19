@@ -1,7 +1,6 @@
 ﻿using ArticleRepository.DTO;
 using ArticleRepository.Service;
 using Articles.Models;
-using Articles.Models.RegisterModel;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -11,11 +10,13 @@ namespace Articles.Controllers.Article
     public class ArticleController : Controller
     {
         private readonly ArticleService service;
+        private readonly CommentService commentService;
         private readonly IMapper mapper;
-        public ArticleController(ArticleService articleService, IMapper mapper)
+        public ArticleController(ArticleService articleService, IMapper mapper, CommentService commentService)
         {
-            service = articleService;
+            this.service = articleService;
             this.mapper = mapper;
+            this.commentService = commentService;
         }
         
         public IActionResult View(int id)
@@ -53,7 +54,12 @@ namespace Articles.Controllers.Article
 
         public IActionResult ShowComments(int articleId)
         {
-            return PartialView("_CommentsView", mapper.Map<List<CommentDTO>, List<CommentViewModel>>(service.GetCommentsByArticleId(articleId)));
+            return PartialView("_CommentsView", mapper.Map<List<CommentDTO>, List<CommentViewModel>>(commentService.GetCommentsByArticleId(articleId)));
+        }
+
+        public IActionResult AddComment(CommentViewModel comment)
+        {
+            co.ad
         }
     }
 }
