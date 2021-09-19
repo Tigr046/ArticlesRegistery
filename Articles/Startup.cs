@@ -3,6 +3,7 @@ using ArticleRepository.Repository;
 using ArticleRepository.Service;
 using Hangfire;
 using Hangfire.SqlServer;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,12 @@ namespace Articles
         {
             services.AddDbContext<ArticleDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<ArticleService, ArticleServiceImplementation>();
+            services.AddTransient<NoticeService, NoticeServiceImplementation>();
+            services.AddTransient<UserService, UserServiceImplementation>();
+            services.AddTransient<CommentService, CommentServiceImplementation>();
+
+
+
             services.AddControllersWithViews();
             services.AddHangfire(configuration => configuration
                 .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
@@ -42,6 +49,12 @@ namespace Articles
                 }));
             services.AddHangfireServer();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                });
 
         }
 
@@ -65,6 +78,9 @@ namespace Articles
 
             app.UseAuthorization();
             app.UseHangfireDashboard();
+
+            app.UseAuthentication();    // аутентификация
+            app.UseAuthorization();     // авторизация
 
             app.UseEndpoints(endpoints =>
             {
