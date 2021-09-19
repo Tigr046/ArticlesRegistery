@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Уведомления";
+}
+@model List<NoticeViewModel>
+@section scripts{ 
+    <script src="~/js/notice/noticeRegistry.js"></script>
+}
+<div class="container">
+    <div class="h1">Уведомления</div>
+
+    @foreach (NoticeViewModel notice in Model)
+    {
+        if (notice.IsReaded)
+        {
+            <div class="bgColorLigthYellow col-6 mt-1 card">@notice.Message</div>
+
+        }
+        else
+        {
+            <div class="unreadednotice bgColorYellow col-6 mt-1 card" val="@notice.Id">@notice.Message</div>
+
+        }
+    }
+</div>
+

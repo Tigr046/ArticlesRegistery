@@ -32,6 +32,7 @@ namespace ArticleRepository.Model
         public DateTime CreationDate { get; set; }
 
         public virtual List<CommentEntity> Comments { get; set; }
+
         public virtual List<NoticeEntity> Notices { get; set; }
     }
 }

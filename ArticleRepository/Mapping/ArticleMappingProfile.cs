@@ -20,6 +20,9 @@ namespace ArticleRepository.Mapping
             CreateMap<CommentEntity, CommentDTO>();
             CreateMap<CommentDTO, CommentEntity>();
 
+            CreateMap<NoticeEntity, NoticeDTO>();
+            CreateMap<NoticeDTO, NoticeEntity>();
+
         }
     }
 }

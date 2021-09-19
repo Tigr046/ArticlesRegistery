@@ -14,5 +14,6 @@ namespace ArticleRepository.Model
 
         [ForeignKey("UserId")]
         public UserEntity User { get; set; }
+
     }
 }

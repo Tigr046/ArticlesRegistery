@@ -5,6 +5,7 @@
 }
 @section scripts{ 
     <script src="~/js/article/view.js"></script>
+    <script src="~/lib/jquery-unobtrusive-ajax/jquery.unobtrusive-ajax.js"></script>
 }
 @Html.HiddenFor(x => x.Id)
 <div id="formForUpdateArticle" class="d-none">
@@ -23,8 +24,11 @@
     {
         <img id="updateButton" src="~/img/gear.svg" />
     }
-    <div id="commentsContainer" class="mt-2 container-fluid">
+    <div id="commentsContainer" class="mt-2 p-0 container-fluid">
         <button id="commentToShow" class="w-100 btn btn-dark">Комментарии</button>
+        <form method="post" data-ajax="true" data-ajax-url="/" data-ajax-method="post" data->
+            <input type="submit" />
+        </form>
         <div id="commentsView" commentsHidden ="true" class="w-100"></div>
     </div>
 </article>
