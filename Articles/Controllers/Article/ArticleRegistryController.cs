@@ -1,7 +1,7 @@
 ﻿using ArticleRepository.DTO;
 using ArticleRepository.Service;
 using Articles.Models;
-using Articles.Models.RegisterModel;
+using Articles.Models.RegistryModel;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Articles.Controllers.Article
 {
-    public class ArticleRegisterController : Controller
+    public class ArticleRegistryController : Controller
     {
         private readonly ArticleService service;
         private readonly IMapper mapper;
-        public ArticleRegisterController(ArticleService articleService, IMapper mapper)
+        public ArticleRegistryController(ArticleService articleService, IMapper mapper)
         {
             service = articleService;
             this.mapper = mapper;
@@ -28,7 +28,7 @@ namespace Articles.Controllers.Article
         public IActionResult Read(int pageNumber, int pageSize)
         {
             return PartialView("_ArticleView",
-                new ArticleRegisterModel()
+                new ArticleRegistryModel()
                 {
                     Articles = mapper.Map<List<ArticleDTO>, List<ArticleViewModel>>(service.GetArticleByPageNumberAndPageSize(pageNumber, pageSize))
                 });

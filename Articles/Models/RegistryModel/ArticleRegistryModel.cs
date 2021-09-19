@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Articles.Models.RegisterModel
+namespace Articles.Models.RegistryModel
 {
-    public class ArticleRegisterModel
+    public class ArticleRegistryModel
     {
         public List<ArticleViewModel> Articles { get; set; }
 
