@@ -6,7 +6,6 @@ using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ArticleRepository.Implementation
 {
@@ -36,6 +35,11 @@ namespace ArticleRepository.Implementation
             UserEntity addedUser = context.Add(mapper.Map<UserDTO, UserEntity>(user)).Entity;
             context.SaveChanges();
             return addedUser.Id;
+        }
+
+        public List<int> GetUserIdsWithBirthdayByDate(int month, int day)
+        {
+            return context.User.Where(x => x.Birthday.Month == month && x.Birthday.Day == day).Select(x => x.Id).ToList();
         }
     }
 }
