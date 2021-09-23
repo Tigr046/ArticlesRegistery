@@ -9,7 +9,11 @@ namespace ArticleRepository.Service
     {
         int GetUnreadedNoticeCountByUserId(int userId);
         List<NoticeDTO> GetAllNoticesByUser(int userId);
+        NoticeDTO AddNewNotice(NoticeDTO notice);
+
 
         void MarkNoticeAsRead(int noticeId);
+
+        List<NoticeDTO> GetUnreadedNoticeByUserId(int userId);
     }
 }

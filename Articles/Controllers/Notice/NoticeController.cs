@@ -23,7 +23,7 @@ namespace Articles.Controllers.Notice
 
         public IActionResult GetAllUserNotices()
         {
-            return View("NoticeRegistry", mapper.Map<List<NoticeDTO>,List<NoticeViewModel>>(noticeService.GetAllNoticesByUser(GetUserIdByCurrContext())));
+            return View("NoticeRegistry", mapper.Map<List<NoticeDTO>,List<NoticeViewModel>>(noticeService.GetAllNoticesByUser(GetUserIdByCurrContext()).OrderByDescending(x => x.Id).ToList()));
         }
 
         public IActionResult GetUnreadedNoticeCount()

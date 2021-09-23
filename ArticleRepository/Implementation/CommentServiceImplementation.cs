@@ -21,7 +21,10 @@ namespace ArticleRepository.Implementation
 
         public CommentDTO AddComment(CommentDTO comment)
         {
-            return mapper.Map<CommentEntity,CommentDTO>(context.Add(mapper.Map<CommentDTO, CommentEntity>(comment)).Entity);
+            CommentDTO addedDTO = mapper.Map<CommentEntity, CommentDTO>(context.Add(mapper.Map<CommentDTO, CommentEntity>(comment)).Entity);
+
+            context.SaveChanges();
+            return addedDTO;
         }
 
         public List<CommentDTO> GetCommentsByArticleId(int articleId)

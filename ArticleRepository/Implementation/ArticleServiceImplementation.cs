@@ -55,5 +55,10 @@ namespace ArticleRepository.Implementation
             context.SaveChanges();
             return mapper.Map<ArticleEntity, ArticleDTO>(updatingArticle);
         }
+
+        public UserDTO GetAuthorByArticleId(int articleId)
+        {
+            return GetArticle(articleId).Author;
+        }
     }
 }

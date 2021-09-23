@@ -1,8 +1,16 @@
-﻿@model List<CommentViewModel>
+﻿@model CommentRegistryModel
 
-@foreach(CommentViewModel comment in Model)
+<form class="mt-1" method="post" data-ajax="true" data-ajax-url="/Article/AddComment" data-ajax-method="post" data-ajax-update="#commentsView">
+    @Html.Hidden("ArticleId", Model.ArticleId)
+    <div class="form-inline">
+        <input type="text" name="Text" placeholder="Оставьте комментарий" class="form-control col-12 bgColorPaleYellow" />
+    </div>
+    <input class="mt-1 bgColorGrey" value="Оставить комментарий" type="submit" />
+</form>
+
+@foreach(CommentViewModel comment in Model.Comments)
 {
-    <div class="card col-12 mt-1">
+    <div class="card col-12 mt-1 bgColorPaleYellow">
         <p>@comment.Author.UserName @comment.CreationDate.ToString("dd MMM yyyy HH:mm")</p>
         <p>@comment.Text</p>
     </div>

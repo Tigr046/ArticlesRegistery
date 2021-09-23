@@ -18,7 +18,7 @@ namespace ArticleRepository.Mapping
             CreateMap<UserDTO, UserEntity>();
 
             CreateMap<CommentEntity, CommentDTO>();
-            CreateMap<CommentDTO, CommentEntity>();
+            CreateMap<CommentDTO, CommentEntity>().AfterMap((d,e)=> e.CreationDate = DateTime.Now);
 
             CreateMap<NoticeEntity, NoticeDTO>();
             CreateMap<NoticeDTO, NoticeEntity>();

@@ -10,6 +10,8 @@ namespace ArticleRepository.Service
     public interface ArticleService
     {
         public ArticleDTO GetArticle(int id);
+
+        public UserDTO GetAuthorByArticleId(int articleId);
         public UserDTO GetAuthor(int id);
 
         public List<ArticleDTO> GetArticleByPageNumberAndPageSize(int pageNumber, int pageSize);
