@@ -13,12 +13,12 @@
     {
         if (notice.IsReaded)
         {
-            <div class="bgColorLigthYellow col-6 mt-1 card">@notice.Message</div>
+            <div class="col-6 mt-1 card">@notice.Message</div>
 
         }
         else
         {
-            <div class="unreadednotice bgColorYellow col-6 mt-1 card" val="@notice.Id">@notice.Message</div>
+            <div class="unreadednotice bgColorGrey col-6 mt-1 card" val="@notice.Id">@notice.Message</div>
 
         }
     }

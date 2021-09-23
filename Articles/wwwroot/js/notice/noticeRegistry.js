@@ -7,7 +7,6 @@
             url: '/Notice/MarkNoticeAsRead',
             data: { noticeId: id},
         })
-        target.classList.remove("unreadednotice", "bgColorYellow")
-        target.classList.add("bgColorLigthYellow")
+        target.classList.remove("bgColorGrey")
     })
 })
