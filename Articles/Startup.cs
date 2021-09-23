@@ -61,7 +61,7 @@ namespace Articles
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRecurringJobManager recurringJob, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -76,11 +76,10 @@ namespace Articles
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            ActivatorUtilities.CreateInstance(serviceProvider, typeof(DailyJob));
             app.UseRouting();
-
             app.UseAuthorization();
             app.UseHangfireDashboard();
-
             app.UseAuthentication();    // аутентификация
             app.UseAuthorization();     // авторизация
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
  
 namespace Articles.Models.Auth
 {
@@ -26,5 +27,9 @@ namespace Articles.Models.Auth
 
         [StringLength(50)]
         public string Patronymic { get; set; }
+
+        [Required]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd/MM/yyyy}")]
+        public DateTime Birthday { get; set; }
     }
 }

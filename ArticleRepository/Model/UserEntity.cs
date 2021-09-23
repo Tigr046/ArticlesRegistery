@@ -31,6 +31,9 @@ namespace ArticleRepository.Model
         [Required]
         public DateTime CreationDate { get; set; }
 
+        [Required]
+        public DateTime Birthday { get; set; }
+
         public virtual List<CommentEntity> Comments { get; set; }
 
         public virtual List<NoticeEntity> Notices { get; set; }

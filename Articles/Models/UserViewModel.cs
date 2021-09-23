@@ -20,6 +20,9 @@ namespace Articles.Models
         public string Patronymic { get; set; }
         
         public DateTime CreationDate { get; set; }
+
+        public DateTime Birthday { get; set; }
+
         public List<CommentViewModel> Comments { get; set; }
 
         public string UserName => $"{SecondName} {FirstName[0]}.{Patronymic[0]}.";
