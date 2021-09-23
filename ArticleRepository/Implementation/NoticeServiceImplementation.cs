@@ -24,6 +24,11 @@ namespace ArticleRepository.Implementation
             return context.User.Include(x => x.Notices).FirstOrDefault(x => x.Id == userId)?.Notices?.Where(x => !x.IsReaded)?.Count() ?? 0;
         }
 
+        public List<NoticeDTO> GetUnreadedNoticeByUserId(int userId)
+        {
+            return mapper.Map<List<NoticeEntity>, List<NoticeDTO>>(context.User.Include(x => x.Notices).FirstOrDefault(x => x.Id == userId)?.Notices?.Where(x => !x.IsReaded)?.ToList() ?? new List<NoticeEntity>());
+        }
+
         public List<NoticeDTO> GetAllNoticesByUser(int userId) => mapper.Map<List<NoticeEntity>, List<NoticeDTO>>(context.Notice.Where(x => x.UserId == userId).ToList());
 
         public void MarkNoticeAsRead(int noticeId)
@@ -31,6 +36,13 @@ namespace ArticleRepository.Implementation
             NoticeEntity noticeToChange = context.Notice.FirstOrDefault(x => x.Id == noticeId);
             noticeToChange.IsReaded = true;
             context.SaveChanges();
+        }
+
+        public NoticeDTO AddNewNotice(NoticeDTO notice)
+        {
+            NoticeDTO addedNotice = mapper.Map<NoticeEntity, NoticeDTO>(context.Notice.Add(mapper.Map<NoticeDTO, NoticeEntity>(notice)).Entity);
+            context.SaveChanges();
+            return addedNotice;
         }
     }
 }

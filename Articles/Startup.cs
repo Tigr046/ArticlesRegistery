@@ -1,6 +1,7 @@
 using ArticleRepository.Implementation;
 using ArticleRepository.Repository;
 using ArticleRepository.Service;
+using Articles.HangfireService;
 using Hangfire;
 using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -31,7 +32,7 @@ namespace Articles
             services.AddTransient<NoticeService, NoticeServiceImplementation>();
             services.AddTransient<UserService, UserServiceImplementation>();
             services.AddTransient<CommentService, CommentServiceImplementation>();
-
+            services.AddTransient<NoticeSendService>();
 
 
             services.AddControllersWithViews();
@@ -47,6 +48,7 @@ namespace Articles
                     UseRecommendedIsolationLevel = true,
                     DisableGlobalLocks = true
                 }));
+
             services.AddHangfireServer();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -59,7 +61,7 @@ namespace Articles
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRecurringJobManager recurringJobManager)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
