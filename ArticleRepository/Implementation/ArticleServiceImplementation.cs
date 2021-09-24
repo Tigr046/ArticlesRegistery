@@ -60,5 +60,10 @@ namespace ArticleRepository.Implementation
         {
             return GetArticle(articleId).Author;
         }
+
+        public ArticleDTO AddArticle(ArticleDTO articleToUpdate)
+        {
+            return mapper.Map<ArticleEntity,ArticleDTO>(context.Article.Add(mapper.Map<ArticleDTO, ArticleEntity>(articleToUpdate)).Entity);
+        }
     }
 }

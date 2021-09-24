@@ -75,6 +75,22 @@ namespace Articles.Controllers.Article
             return ShowComments(comment.ArticleId);
         }
 
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(ArticleViewModel article)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(article);
+            }
+            service.AddArticle(mapper.Map<ArticleViewModel, ArticleDTO>(article));
+            return RedirectToAction("Index","ArticleRegistry");
+        }
+
         private int GetUserIdByCurrContext()
         {
             int userId = 0;

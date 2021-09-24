@@ -23,12 +23,18 @@ namespace Articles.Controllers.Notice
 
         public IActionResult GetAllUserNotices()
         {
-            return View("NoticeRegistry", mapper.Map<List<NoticeDTO>,List<NoticeViewModel>>(noticeService.GetAllNoticesByUser(GetUserIdByCurrContext()).OrderByDescending(x => x.Id).ToList()));
+            int? userId = GetUserIdByCurrContext();
+            if (userId.HasValue)
+                return View("NoticeRegistry", mapper.Map<List<NoticeDTO>,List<NoticeViewModel>>(noticeService.GetAllNoticesByUser(userId.Value).OrderByDescending(x => x.Id).ToList()));
+            return View("NoticeRegistry", new List<NoticeViewModel>());
         }
 
         public IActionResult GetUnreadedNoticeCount()
         {
-            return new JsonResult(noticeService.GetUnreadedNoticeCountByUserId(GetUserIdByCurrContext()));
+            int? userId = GetUserIdByCurrContext();
+            if (userId.HasValue)
+                return new JsonResult(noticeService.GetUnreadedNoticeCountByUserId(userId.Value));
+            return new JsonResult(0);
         }
 
         public IActionResult MarkNoticeAsRead(int noticeId)
@@ -36,14 +42,15 @@ namespace Articles.Controllers.Notice
             noticeService.MarkNoticeAsRead(noticeId);
             return new JsonResult(true);
         }
-        private int GetUserIdByCurrContext()
+        
+        private int? GetUserIdByCurrContext()
         {
             int userId = 0;
             if (Int32.TryParse(User.FindFirst((x) => x.Type == "Id")?.Value, out userId))
             {
                 return userId;
             }
-            throw new Exception("Значение id получение из куки неполучилось сконвертировать в int");
+            return null;
         }
     }
 }
