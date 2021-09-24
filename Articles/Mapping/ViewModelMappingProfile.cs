@@ -1,11 +1,8 @@
 ﻿using ArticleRepository.DTO;
-using ArticleRepository.Model;
 using Articles.Models;
+using Articles.Models.Auth;
 using AutoMapper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Articles.Mapping
 {
@@ -21,6 +18,12 @@ namespace Articles.Mapping
 
             CreateMap<CommentViewModel, CommentDTO>();
             CreateMap<CommentDTO, CommentViewModel>();
+
+            CreateMap<UserDTO, RegisterModel>();
+            CreateMap<RegisterModel, UserDTO>().AfterMap((r,u) => u.CreationDate = DateTime.Now);
+
+            CreateMap<NoticeViewModel, NoticeDTO>();
+            CreateMap<NoticeDTO, NoticeViewModel>();
         }
     }
 }

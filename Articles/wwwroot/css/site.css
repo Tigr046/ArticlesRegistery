@@ -69,3 +69,66 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.colorGrey {
+    color: #A4A5A6;
+}
+.colorLigthYellow {
+    color: #F2EFBD;
+}
+.colorYellow {
+    color: #F2D750;
+}
+.colorPaleYellow {
+    color: #F2ECCE;
+}
+.colorOrange {
+    color: #F2CA52;
+}
+.impColorGrey {
+    color: #A4A5A6 !important;
+}
+
+.impColorLigthYellow {
+    color: #F2EFBD !important;
+}
+
+.impColorYellow {
+    color: #F2D750 !important;
+}
+
+.impColorPaleYellow {
+    color: #F2ECCE !important;
+}
+
+.impColorOrange {
+    color: #F2CA52 !important;
+}
+
+.bgColorGrey {
+    background-color: #A4A5A6;
+}
+
+.bgColorLigthYellow {
+    background-color: #F2EFBD;
+}
+
+.bgColorYellow {
+    background-color: #F2D750;
+}
+
+.bgColorPaleYellow {
+    background-color: #F2ECCE;
+}
+
+.bgColorOrange {
+    background-color: #F2CA52;
+}
+
+.bgColorBlack {
+    background-color: black;
+}
+
+.bgColorWhiteSmoke {
+    background-color: whitesmoke;
+}

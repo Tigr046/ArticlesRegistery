@@ -56,9 +56,14 @@ namespace ArticleRepository.Implementation
             return mapper.Map<ArticleEntity, ArticleDTO>(updatingArticle);
         }
 
-        public List<CommentDTO> GetCommentsByArticleId(int articleId)
+        public UserDTO GetAuthorByArticleId(int articleId)
         {
-            return mapper.Map<List<CommentEntity>, List<CommentDTO>>(context.Comment.Include(x => x.Author).Where(x => x.ArticleId == articleId).ToList());
+            return GetArticle(articleId).Author;
+        }
+
+        public ArticleDTO AddArticle(ArticleDTO articleToUpdate)
+        {
+            return mapper.Map<ArticleEntity,ArticleDTO>(context.Article.Add(mapper.Map<ArticleDTO, ArticleEntity>(articleToUpdate)).Entity);
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using ArticleRepository.DTO;
 using ArticleRepository.Service;
+using Articles.HangfireService;
 using Articles.Models;
-using Articles.Models.RegisterModel;
+using Articles.Models.RegistryModel;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace Articles.Controllers.Article
@@ -11,26 +13,17 @@ namespace Articles.Controllers.Article
     public class ArticleController : Controller
     {
         private readonly ArticleService service;
+        private readonly CommentService commentService;
         private readonly IMapper mapper;
-        public ArticleController(ArticleService articleService, IMapper mapper)
+        private readonly NoticeSendService noticeSendService;
+        public ArticleController(ArticleService articleService, IMapper mapper, CommentService commentService, NoticeSendService noticeSendService)
         {
-            service = articleService;
+            this.service = articleService;
             this.mapper = mapper;
+            this.commentService = commentService;
+            this.noticeSendService = noticeSendService;
         }
-        public IActionResult Index()
-        {
-            return View(); ;
-        }
-
-        public IActionResult Read(int pageNumber, int pageSize)
-        {
-            return PartialView("_ArticleView",
-                new ArticleRegisterModel()
-                {
-                    Articles = mapper.Map<List<ArticleDTO>, List<ArticleViewModel>>(service.GetArticleByPageNumberAndPageSize(pageNumber, pageSize))
-                });
-        }
-
+        
         public IActionResult View(int id)
         {
             ArticleViewModel article = mapper.Map<ArticleDTO, ArticleViewModel>(service.GetArticle(id));
@@ -66,7 +59,46 @@ namespace Articles.Controllers.Article
 
         public IActionResult ShowComments(int articleId)
         {
-            return PartialView("_CommentsView", mapper.Map<List<CommentDTO>, List<CommentViewModel>>(service.GetCommentsByArticleId(articleId)));
+            CommentRegistryModel registryModel = new CommentRegistryModel(
+                mapper.Map<List<CommentDTO>, List<CommentViewModel>>(commentService.GetCommentsByArticleId(articleId)),
+                articleId
+                );
+            return PartialView("_CommentsView", registryModel);
+        }
+
+        public IActionResult AddComment(CommentViewModel comment)
+        {
+            CommentDTO commentToAdd = mapper.Map<CommentViewModel, CommentDTO>(comment);
+            commentToAdd.AuthorId = GetUserIdByCurrContext();
+            commentService.AddComment(commentToAdd);
+            noticeSendService.SendNoticeForNewComment(comment.ArticleId);
+            return ShowComments(comment.ArticleId);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(ArticleViewModel article)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(article);
+            }
+            service.AddArticle(mapper.Map<ArticleViewModel, ArticleDTO>(article));
+            return RedirectToAction("Index","ArticleRegistry");
+        }
+
+        private int GetUserIdByCurrContext()
+        {
+            int userId = 0;
+            if (Int32.TryParse(User.FindFirst((x) => x.Type == "Id")?.Value, out userId))
+            {
+                return userId;
+            }
+            throw new Exception("Значение id получение из куки неполучилось сконвертировать в int");
         }
     }
 }

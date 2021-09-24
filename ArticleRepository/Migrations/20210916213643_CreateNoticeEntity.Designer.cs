@@ -4,14 +4,16 @@ using ArticleRepository.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ArticleRepository.Migrations
 {
     [DbContext(typeof(ArticleDbContext))]
-    partial class ArticleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210916213643_CreateNoticeEntity")]
+    partial class CreateNoticeEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,26 +111,13 @@ namespace ArticleRepository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("Patronymic")
                         .HasMaxLength(50)
@@ -177,7 +166,7 @@ namespace ArticleRepository.Migrations
             modelBuilder.Entity("ArticleRepository.Model.NoticeEntity", b =>
                 {
                     b.HasOne("ArticleRepository.Model.UserEntity", "User")
-                        .WithMany("Notices")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -193,8 +182,6 @@ namespace ArticleRepository.Migrations
             modelBuilder.Entity("ArticleRepository.Model.UserEntity", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Notices");
                 });
 #pragma warning restore 612, 618
         }

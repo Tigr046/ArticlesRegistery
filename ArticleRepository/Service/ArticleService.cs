@@ -9,15 +9,18 @@ namespace ArticleRepository.Service
 {
     public interface ArticleService
     {
-        public ArticleDTO GetArticle(int id);
-        public UserDTO GetAuthor(int id);
+        ArticleDTO GetArticle(int id);
 
-        public List<ArticleDTO> GetArticleByPageNumberAndPageSize(int pageNumber, int pageSize);
+        UserDTO GetAuthorByArticleId(int articleId);
+        UserDTO GetAuthor(int id);
 
-        public bool ArticleExists(int id);
+        List<ArticleDTO> GetArticleByPageNumberAndPageSize(int pageNumber, int pageSize);
 
-        public ArticleDTO UpdateArticle(ArticleDTO articleToUpdate);
-        public List<CommentDTO> GetCommentsByArticleId(int articleId);
+        bool ArticleExists(int id);
+
+        ArticleDTO UpdateArticle(ArticleDTO articleToUpdate);
+
+        ArticleDTO AddArticle(ArticleDTO articleToUpdate);
 
     }
 }

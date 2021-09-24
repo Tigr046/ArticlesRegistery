@@ -2,11 +2,11 @@
     ViewData["Title"] = "Статьи";
 }
 @section scripts{
-    <script src="~/js/article/index.js"></script>
+    <script src="~/js/articleRegistry/index.js"></script>
 }
 @Html.Hidden("PageNumber")
 @Html.Hidden("PageSize")
-
+@Html.ActionLink("Написать статью", "Create","Article", new { },new { @class = "btn btn-outline-dark" })
 <div id="articleViewDiv" class="container-fluid w-100">
 
 </div>
