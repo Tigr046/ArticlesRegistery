@@ -1,0 +1,12 @@
+﻿@{
+    Layout = null;
+}
+@model List<HeaderLinkModel>
+<ul class="navbar-nav flex-grow-1">
+    @foreach (HeaderLinkModel linkModel in Model)
+    {
+        <li class="nav-item">
+            <a class="nav-link" id="@linkModel.FormId" asp-controller="@linkModel.Controller" asp-action="@linkModel.Action">@linkModel.Text</a>
+        </li>
+    }
+</ul>

@@ -52,5 +52,15 @@ namespace ArticleRepository.Implementation
         {
             return context.User.Where(x => x.Birthday.Month == month && x.Birthday.Day == day).Select(x => x.Id).ToList();
         }
+
+        public UserDTO GetUser(int id)
+        {
+            return mapper.Map<UserEntity, UserDTO>(context.User.FirstOrDefault(x => x.Id == id));
+        }
+
+        public RoleDTO GetUserRoleByUserId(int userId)
+        {
+            return mapper.Map<RoleEntity, RoleDTO>(context.User.Include(x=> x.Role).First(x => x.Id == userId).Role);
+        }
     }
 }

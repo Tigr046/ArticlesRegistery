@@ -15,5 +15,9 @@ namespace ArticleRepository.Service
         UserDTO AddNewUser(UserDTO user);
 
         List<UserDTO> GetAllUsersByPageNumberAndPageSize(int pageSize, int pageNumber);
+
+        UserDTO GetUser(int id);
+
+        RoleDTO GetUserRoleByUserId(int userId);
     }
 }
