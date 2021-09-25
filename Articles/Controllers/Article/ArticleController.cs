@@ -70,10 +70,11 @@ namespace Articles.Controllers.Article
             return PartialView("_CommentsView", registryModel);
         }
 
+        [CustomAttribute.CustomAuthorization(Roles:"admin,user")]
         public IActionResult AddComment(CommentViewModel comment)
         {
             CommentDTO commentToAdd = mapper.Map<CommentViewModel, CommentDTO>(comment);
-            commentToAdd.AuthorId = GetUserIdByCurrContext();
+            commentToAdd.AuthorId = GetUserIdByCurrContext().Value;
             commentService.AddComment(commentToAdd);
             noticeSendService.SendNoticeForNewComment(comment.ArticleId);
             return ShowComments(comment.ArticleId);
@@ -95,14 +96,14 @@ namespace Articles.Controllers.Article
             return RedirectToAction("Index","ArticleRegistry");
         }
 
-        private int GetUserIdByCurrContext()
+        private int? GetUserIdByCurrContext()
         {
             int userId = 0;
             if (Int32.TryParse(User.FindFirst((x) => x.Type == "Id")?.Value, out userId))
             {
                 return userId;
             }
-            throw new Exception("Значение id получение из куки неполучилось сконвертировать в int");
+            return null;
         }
     }
 }
