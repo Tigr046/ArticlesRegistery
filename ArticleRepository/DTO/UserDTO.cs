@@ -22,6 +22,9 @@ namespace ArticleRepository.DTO
 
         public DateTime Birthday { get; set; }
 
+        public RoleDTO Role { get; set; }
+
+        public int RoleId { get; set; }
         public List<CommentDTO> Comments { get; set; }
 
     }

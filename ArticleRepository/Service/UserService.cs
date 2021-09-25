@@ -12,6 +12,6 @@ namespace ArticleRepository.Service
 
         bool UserWithEmailCreated(string email);
 
-        int AddNewUser(UserDTO user);
+        UserDTO AddNewUser(UserDTO user);
     }
 }

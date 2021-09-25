@@ -23,6 +23,8 @@ namespace ArticleRepository.Mapping
             CreateMap<NoticeEntity, NoticeDTO>();
             CreateMap<NoticeDTO, NoticeEntity>();
 
+            CreateMap<RoleEntity, RoleDTO>();
+            CreateMap<RoleDTO, RoleEntity>();
         }
     }
 }
