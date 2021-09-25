@@ -6,7 +6,10 @@
 }
 @Html.Hidden("PageNumber")
 @Html.Hidden("PageSize")
-@Html.ActionLink("Написать статью", "Create","Article", new { },new { @class = "btn btn-outline-dark" })
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.ActionLink("Написать статью", "Create", "Article", new { }, new { @class = "btn btn-outline-dark" })
+}
 <div id="articleViewDiv" class="container-fluid w-100">
 
 </div>
