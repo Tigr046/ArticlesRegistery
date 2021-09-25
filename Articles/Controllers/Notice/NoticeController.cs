@@ -42,6 +42,12 @@ namespace Articles.Controllers.Notice
             noticeService.MarkNoticeAsRead(noticeId);
             return new JsonResult(true);
         }
+
+        public IActionResult Delete(int id)
+        {
+            noticeService.DeleteNotice(id);
+            return RedirectToAction("GetAllUserNotices");
+        }
         
         private int? GetUserIdByCurrContext()
         {

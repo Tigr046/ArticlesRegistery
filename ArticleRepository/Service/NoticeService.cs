@@ -15,5 +15,7 @@ namespace ArticleRepository.Service
         void MarkNoticeAsRead(int noticeId);
 
         List<NoticeDTO> GetUnreadedNoticeByUserId(int userId);
+
+        void DeleteNotice(int id);
     }
 }

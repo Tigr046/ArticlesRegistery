@@ -11,16 +11,17 @@
 
     @foreach (NoticeViewModel notice in Model)
     {
-        if (notice.IsReaded)
-        {
-            <div class="col-6 mt-1 card">@notice.Message</div>
-
-        }
-        else
-        {
-            <div class="unreadednotice bgColorGrey col-6 mt-1 card" val="@notice.Id">@notice.Message</div>
-
-        }
+        <div class="col-6 mt-1 notice">
+            @if(notice.IsReaded)
+            {
+                <div class="card-header">@notice.Message</div>
+            }
+            else
+            {
+                <div class="unreadednotice bgColorGrey col-6 mt-1 card-header" val="@notice.Id">@notice.Message</div>
+            }
+            <div class="card-footer"><span val="@notice.Id" class="text-danger deleteNotice">Удалить</span></div>
+        </div>
     }
 </div>
 

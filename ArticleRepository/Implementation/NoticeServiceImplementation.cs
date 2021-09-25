@@ -44,5 +44,11 @@ namespace ArticleRepository.Implementation
             context.SaveChanges();
             return addedNotice;
         }
+
+        public void DeleteNotice(int id)
+        {
+            context.Notice.Remove(context.Notice.FirstOrDefault(x => x.Id == id));
+            context.SaveChanges();
+        }
     }
 }
