@@ -16,7 +16,11 @@ namespace Articles.Controllers.Layout
             new HeaderLinkModel(){FormId = "MainPageLink", Controller = "Home",Action = "Index", Text = "Главная страница", Roles = new List<string>(){"admin", "user", "anon" } },
             new HeaderLinkModel(){FormId = "ArticleRegistryLink", Controller = "ArticleRegistry",Action = "Index", Text = "Статьи", Roles = new List<string>(){"admin", "user", "anon" } },
             new HeaderLinkModel(){FormId = "NoticeLink", Controller = "Notice",Action = "GetAllUserNotices", Text = "Уведомления", Roles = new List<string>(){"admin", "user" } },
-            new HeaderLinkModel(){FormId = "AllUserLink", Controller = "UserRegistry",Action = "Index", Text = "Пользователи", Roles = new List<string>(){"admin"} }
+            new HeaderLinkModel(){FormId = "AllUserLink", Controller = "UserRegistry",Action = "Index", Text = "Пользователи", Roles = new List<string>(){"admin"} },
+            new HeaderLinkModel(){FormId = "LoginUser", Controller = "Account",Action = "Login", Text = "Войти", Roles = new List<string>(){"anon"} },
+            new HeaderLinkModel(){FormId = "UserName", Controller = "",Action = "", Text = "Имя пользователя", Roles = new List<string>(){"user","admin"} },
+            new HeaderLinkModel(){FormId = "LogOut", Controller = "Account",Action = "Logout", Text = "Выйти", Roles = new List<string>(){"user","admin"} },
+
 
         };
 
@@ -32,11 +36,15 @@ namespace Articles.Controllers.Layout
             List<HeaderLinkModel> allowedLinks = new List<HeaderLinkModel>();
             if (userid.HasValue)
             {
-                RoleDTO userRole = userService.GetUserRoleByUserId(userid.Value);
+                UserDTO user = userService.GetUser(userid.Value);
                 foreach(HeaderLinkModel headerLink in allHeaderLinks)
                 {
-                    if (headerLink.Roles.Contains(userRole.Name))
+                    if (headerLink.Roles.Contains(user.Role.Name))
+                    {
+                        if (headerLink.FormId == "UserName")
+                            headerLink.Text = $"{user.SecondName} {user.FirstName}";
                         allowedLinks.Add(headerLink);
+                    }
                 }
 
             }

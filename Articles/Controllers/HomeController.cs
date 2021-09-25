@@ -20,7 +20,6 @@ namespace Articles.Controllers
             _logger = logger;
         }
 
-        [CustomAuthorization("admin,user")]
         public IActionResult Index()
         {
             return View();

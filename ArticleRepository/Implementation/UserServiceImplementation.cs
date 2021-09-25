@@ -55,7 +55,7 @@ namespace ArticleRepository.Implementation
 
         public UserDTO GetUser(int id)
         {
-            return mapper.Map<UserEntity, UserDTO>(context.User.FirstOrDefault(x => x.Id == id));
+            return mapper.Map<UserEntity, UserDTO>(context.User.Include(x => x.Role).FirstOrDefault(x => x.Id == id));
         }
 
         public RoleDTO GetUserRoleByUserId(int userId)
