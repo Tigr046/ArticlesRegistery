@@ -27,7 +27,11 @@ namespace Articles.Controllers.Article
         public IActionResult View(int id)
         {
             ArticleViewModel article = mapper.Map<ArticleDTO, ArticleViewModel>(service.GetArticle(id));
-            article.CanBeUpdated = true;
+            int? userId = GetUserIdByCurrContext();
+            if (userId.HasValue && article.AuthorId == userId)
+                article.CanBeUpdated = true;
+            else
+                article.CanBeUpdated = false;
             return View(article);
         }
 
