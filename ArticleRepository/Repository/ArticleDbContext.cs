@@ -9,6 +9,8 @@ namespace ArticleRepository.Repository
         public DbSet<UserEntity> User { get; set; }
         public DbSet<CommentEntity> Comment { get; set; }
         public DbSet<NoticeEntity> Notice { get; set; }
+        public DbSet<RoleEntity> Role { get; set; }
+
 
 
         public ArticleDbContext(DbContextOptions<ArticleDbContext> options)

@@ -35,10 +35,10 @@ namespace Articles.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserViewModel user = mapper.Map<UserDTO, UserViewModel>(userService.GetUserByEmailAndPassword(model.Email, model.Password));
+                UserDTO user = userService.GetUserByEmailAndPassword(model.Email, model.Password);
                 if (user != null)
                 {
-                    await Authenticate(user.Email, user.Id); // аутентификация
+                    await Authenticate(user); // аутентификация
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -59,9 +59,7 @@ namespace Articles.Controllers
             {
                 if (!userService.UserWithEmailCreated(model.Email))
                 {
-                    int newEntityId = userService.AddNewUser(mapper.Map<RegisterModel, UserDTO>(model));
-
-                    await Authenticate(model.Email, newEntityId);
+                    await Authenticate(userService.AddNewUser(mapper.Map<RegisterModel, UserDTO>(model)));
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -71,12 +69,13 @@ namespace Articles.Controllers
             return View(model);
         }
 
-        private async Task Authenticate(string userName, int userId)
+        private async Task Authenticate(UserDTO user)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName),
-                new Claim("Id",userId.ToString(),"int")
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name),
+                new Claim("Id", user.Id.ToString())
             };
 
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

@@ -3,6 +3,7 @@ using ArticleRepository.Model;
 using ArticleRepository.Repository;
 using ArticleRepository.Service;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace ArticleRepository.Implementation
 
         public UserDTO GetUserByEmailAndPassword(string email, string password)
         {
-            return mapper.Map<UserEntity, UserDTO>(context.User.FirstOrDefault(u => u.Email == email && u.Password == password));
+            return mapper.Map<UserEntity, UserDTO>(context.User.Include(x => x.Role).FirstOrDefault(u => u.Email == email && u.Password == password));
         }
 
         public bool UserWithEmailCreated(string email)
@@ -30,11 +31,13 @@ namespace ArticleRepository.Implementation
             return context.User.FirstOrDefault(u => u.Email == email) != null ? true : false;
         }
 
-        public int AddNewUser(UserDTO user)
+        public UserDTO AddNewUser(UserDTO user)
         {
-            UserEntity addedUser = context.Add(mapper.Map<UserDTO, UserEntity>(user)).Entity;
+            UserEntity userToAdd = mapper.Map<UserDTO, UserEntity>(user);
+            userToAdd.Role = context.Role.FirstOrDefault(x => x.Name == "user");
+            UserEntity addedUser = context.Add(userToAdd).Entity;
             context.SaveChanges();
-            return addedUser.Id;
+            return mapper.Map<UserEntity,UserDTO>(addedUser);
         }
 
         public List<int> GetUserIdsWithBirthdayByDate(int month, int day)

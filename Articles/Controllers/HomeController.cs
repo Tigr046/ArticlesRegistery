@@ -1,4 +1,5 @@
-﻿using Articles.Models;
+﻿using Articles.CustomAttribute;
+using Articles.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -19,7 +20,7 @@ namespace Articles.Controllers
             _logger = logger;
         }
 
-        [Authorize]
+        [CustomAuthorization("admin,user")]
         public IActionResult Index()
         {
             return View();
