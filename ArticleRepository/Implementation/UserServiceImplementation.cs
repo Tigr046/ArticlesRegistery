@@ -21,6 +21,14 @@ namespace ArticleRepository.Implementation
             this.mapper = mapper;
         }
 
+        public List<UserDTO> GetAllUsersByPageNumberAndPageSize(int pageSize, int pageNumber)
+        {
+            int skipItemCount = pageSize * pageNumber - 1 < 0 ? 0 : pageSize * pageNumber - 1;
+            return mapper.Map<List<UserEntity>, List<UserDTO>>(
+                context.User.AsQueryable().Skip(skipItemCount).Take(pageSize).ToList());
+
+        }
+
         public UserDTO GetUserByEmailAndPassword(string email, string password)
         {
             return mapper.Map<UserEntity, UserDTO>(context.User.Include(x => x.Role).FirstOrDefault(u => u.Email == email && u.Password == password));

@@ -13,5 +13,7 @@ namespace ArticleRepository.Service
         bool UserWithEmailCreated(string email);
 
         UserDTO AddNewUser(UserDTO user);
+
+        List<UserDTO> GetAllUsersByPageNumberAndPageSize(int pageSize, int pageNumber);
     }
 }

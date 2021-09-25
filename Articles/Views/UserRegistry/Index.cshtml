@@ -1,0 +1,41 @@
+﻿@model UserRegistryModel
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Email</td>
+            <td>Имя</td>
+            <td>Фамилия</td>
+            <td>Отчество</td>
+            <td>День рождения</td>
+            <td>Дата создания аккаунта</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (UserViewModel user in Model.UserViews)
+        {
+        <tr>
+            <td>
+                @user.Email
+            </td>
+            <td>
+                @user.FirstName
+            </td>
+            <td>
+                @user.SecondName
+            </td>
+            <td>
+                @user.Patronymic
+            </td>
+            <td>
+                @user.Birthday.ToString("dd.mm.yyyy")
+            </td>
+            <td>
+                @user.CreationDate
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
