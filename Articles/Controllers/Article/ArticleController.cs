@@ -15,19 +15,21 @@ namespace Articles.Controllers.Article
         private readonly ArticleService service;
         private readonly CommentService commentService;
         private readonly IMapper mapper;
+        private readonly UserService userService;
         private readonly NoticeSendService noticeSendService;
-        public ArticleController(ArticleService articleService, IMapper mapper, CommentService commentService, NoticeSendService noticeSendService)
+        public ArticleController(ArticleService articleService, IMapper mapper, CommentService commentService, UserService userService, NoticeSendService noticeSendService)
         {
             this.service = articleService;
             this.mapper = mapper;
             this.commentService = commentService;
             this.noticeSendService = noticeSendService;
+            this.userService = userService;
         }
         
         public IActionResult View(int id)
         {
             ArticleViewModel article = mapper.Map<ArticleDTO, ArticleViewModel>(service.GetArticle(id));
-            int? userId = GetUserIdByCurrContext();
+            int? userId = userService.GetUserIdByCurrContext(User);
             if (userId.HasValue && article.AuthorId == userId)
                 article.CanBeUpdated = true;
             else
@@ -74,7 +76,7 @@ namespace Articles.Controllers.Article
         public IActionResult AddComment(CommentViewModel comment)
         {
             CommentDTO commentToAdd = mapper.Map<CommentViewModel, CommentDTO>(comment);
-            commentToAdd.AuthorId = GetUserIdByCurrContext().Value;
+            commentToAdd.AuthorId =userService.GetUserIdByCurrContext(User).Value;
             commentService.AddComment(commentToAdd);
             noticeSendService.SendNoticeForNewComment(comment.ArticleId);
             return ShowComments(comment.ArticleId);
@@ -94,16 +96,6 @@ namespace Articles.Controllers.Article
             }
             service.AddArticle(mapper.Map<ArticleViewModel, ArticleDTO>(article));
             return RedirectToAction("Index","ArticleRegistry");
-        }
-
-        private int? GetUserIdByCurrContext()
-        {
-            int userId = 0;
-            if (Int32.TryParse(User.FindFirst((x) => x.Type == "Id")?.Value, out userId))
-            {
-                return userId;
-            }
-            return null;
         }
     }
 }

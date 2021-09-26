@@ -12,18 +12,20 @@ namespace Articles.Controllers.Notice
 {
     public class NoticeController : Controller
     {
-        NoticeService noticeService;
+        private readonly NoticeService noticeService;
+        private readonly UserService userService;
         private readonly IMapper mapper;
 
-        public NoticeController(NoticeService noticeService, IMapper mapper)
+        public NoticeController(NoticeService noticeService, IMapper mapper, UserService userService)
         {
             this.mapper = mapper;
             this.noticeService = noticeService;
+            this.userService = userService;
         }
 
         public IActionResult GetAllUserNotices()
         {
-            int? userId = GetUserIdByCurrContext();
+            int? userId = userService.GetUserIdByCurrContext(User);
             if (userId.HasValue)
                 return View("NoticeRegistry", mapper.Map<List<NoticeDTO>,List<NoticeViewModel>>(noticeService.GetAllNoticesByUser(userId.Value).OrderByDescending(x => x.Id).ToList()));
             return View("NoticeRegistry", new List<NoticeViewModel>());
@@ -31,7 +33,7 @@ namespace Articles.Controllers.Notice
 
         public IActionResult GetUnreadedNoticeCount()
         {
-            int? userId = GetUserIdByCurrContext();
+            int? userId = userService.GetUserIdByCurrContext(User);
             if (userId.HasValue)
                 return new JsonResult(noticeService.GetUnreadedNoticeCountByUserId(userId.Value));
             return new JsonResult(0);
@@ -47,16 +49,6 @@ namespace Articles.Controllers.Notice
         {
             noticeService.DeleteNotice(id);
             return RedirectToAction("GetAllUserNotices");
-        }
-        
-        private int? GetUserIdByCurrContext()
-        {
-            int userId = 0;
-            if (Int32.TryParse(User.FindFirst((x) => x.Type == "Id")?.Value, out userId))
-            {
-                return userId;
-            }
-            return null;
         }
     }
 }

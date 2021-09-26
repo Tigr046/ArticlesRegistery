@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace ArticleRepository.Implementation
 {
@@ -55,12 +56,31 @@ namespace ArticleRepository.Implementation
 
         public UserDTO GetUser(int id)
         {
-            return mapper.Map<UserEntity, UserDTO>(context.User.Include(x => x.Role).FirstOrDefault(x => x.Id == id));
+            return mapper.Map<UserEntity, UserDTO>(GetUserEntity(id));
         }
 
         public RoleDTO GetUserRoleByUserId(int userId)
         {
-            return mapper.Map<RoleEntity, RoleDTO>(context.User.Include(x=> x.Role).First(x => x.Id == userId).Role);
+            return mapper.Map<RoleEntity, RoleDTO>(GetUserEntity(userId).Role);
         }
+
+        public UserDTO UpdateUser(UserDTO user)
+        {
+            UserEntity userToUpdate = mapper.Map(user, GetUserEntity(user.Id));
+            context.SaveChanges();
+            return mapper.Map<UserEntity, UserDTO>(userToUpdate);
+        }
+
+        public int? GetUserIdByCurrContext(ClaimsPrincipal user)
+        {
+            int userId = 0;
+            if (Int32.TryParse(user.FindFirst((x) => x.Type == "Id")?.Value, out userId))
+            {
+                return userId;
+            }
+            return null;
+        }
+
+        private UserEntity GetUserEntity(int id) => context.User.Include(x => x.Role).FirstOrDefault(x => x.Id == id) ?? throw new Exception($"Не найден пользователь с идентификатором {id}");
     }
 }

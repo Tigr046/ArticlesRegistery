@@ -32,7 +32,7 @@ namespace Articles.Controllers.Layout
 
         public IActionResult GetHeaderByUser()
         {
-            int? userid = GetUserIdByCurrContext();
+            int? userid = userService.GetUserIdByCurrContext(User);
             List<HeaderLinkModel> allowedLinks = new List<HeaderLinkModel>();
             if (userid.HasValue)
             {
@@ -58,15 +58,6 @@ namespace Articles.Controllers.Layout
             }
 
             return View("_HeaderLinkContent", allowedLinks);
-        }
-        private int? GetUserIdByCurrContext()
-        {
-            int userId = 0;
-            if (Int32.TryParse(User.FindFirst((x) => x.Type == "Id")?.Value, out userId))
-            {
-                return userId;
-            }
-            return null;
         }
     }
 }

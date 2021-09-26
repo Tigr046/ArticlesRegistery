@@ -1,6 +1,7 @@
 ﻿using ArticleRepository.DTO;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace ArticleRepository.Service
 {
@@ -18,6 +19,10 @@ namespace ArticleRepository.Service
 
         UserDTO GetUser(int id);
 
+        UserDTO UpdateUser(UserDTO user); 
+
         RoleDTO GetUserRoleByUserId(int userId);
+
+        int? GetUserIdByCurrContext(ClaimsPrincipal user);
     }
 }

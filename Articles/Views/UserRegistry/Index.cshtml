@@ -15,7 +15,7 @@
     <tbody>
         @foreach (UserViewModel user in Model.UserViews)
         {
-        <tr>
+        <tr class="userRow">
             <td>
                 @user.Email
             </td>
@@ -33,6 +33,9 @@
             </td>
             <td>
                 @user.CreationDate
+            </td>
+            <td>
+                <a asp-action="Edit" asp-controller="User" asp-route-id="@user.Id">Редактировать</a>
             </td>
         </tr>
         }
