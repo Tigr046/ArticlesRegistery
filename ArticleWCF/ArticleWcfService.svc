@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="ArticleWCF.ArticleWcfService" CodeBehind="ArticleWcfService.svc.cs" Factory="ArticleWCF.App_Start.NInjectServiceHostFactory" %>

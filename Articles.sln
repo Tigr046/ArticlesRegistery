@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Articles", "Articles\Articles.csproj", "{11A45BA4-DB53-4D6D-A745-BC7756F0FF3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Articles", "Articles\Articles.csproj", "{11A45BA4-DB53-4D6D-A745-BC7756F0FF3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArticleRepository", "ArticleRepository\ArticleRepository.csproj", "{FAF610EC-DF6D-4969-BB17-9974CF561F61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArticleRepository", "ArticleRepository\ArticleRepository.csproj", "{FAF610EC-DF6D-4969-BB17-9974CF561F61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArticleWCF", "ArticleWCF\ArticleWCF.csproj", "{779EB684-7FEE-4773-A66A-99927422512C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{FAF610EC-DF6D-4969-BB17-9974CF561F61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAF610EC-DF6D-4969-BB17-9974CF561F61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAF610EC-DF6D-4969-BB17-9974CF561F61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{779EB684-7FEE-4773-A66A-99927422512C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{779EB684-7FEE-4773-A66A-99927422512C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{779EB684-7FEE-4773-A66A-99927422512C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{779EB684-7FEE-4773-A66A-99927422512C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
