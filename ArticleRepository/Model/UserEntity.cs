@@ -43,5 +43,8 @@ namespace ArticleRepository.Model
         public virtual List<CommentEntity> Comments { get; set; }
 
         public virtual List<NoticeEntity> Notices { get; set; }
+
+        public virtual List<ArticleEntity> Articles { get; set; }
+
     }
 }

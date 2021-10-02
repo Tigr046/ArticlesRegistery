@@ -1,4 +1,5 @@
 ﻿using ArticleWCF.Implementation;
+using ArticleWCF.Mapper;
 using ArticleWCF.Repository;
 using ArticleWCF.Service;
 using Ninject;
@@ -20,7 +21,8 @@ namespace ArticleWCF.App_Start
         {
             kernel = new StandardKernel();
             //add the rest of the mappings here
-            kernel.Bind<ArticleContext>().ToSelf().WithConstructorArgument<string>(ConfigurationManager.ConnectionStrings["MyDB"].ToString());
+            kernel.Bind<ArticleContext>().ToSelf();
+            kernel.Bind<Mapper.Mapper>().ToSelf();
             kernel.Bind<IArticleService>().To<ArticleServiceImplementation>();
         }
 

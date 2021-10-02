@@ -110,7 +110,9 @@
     <Compile Include="App_Start\NInjectInstanceProvider.cs" />
     <Compile Include="App_Start\NInjectServiceHostFactory .cs" />
     <Compile Include="Implementation\ArticleServiceImplementation.cs" />
+    <Compile Include="Mapper\Mapper.cs" />
     <Compile Include="Models\DBModels\ArticleEntity.cs" />
+    <Compile Include="Models\DBModels\UserEntity.cs" />
     <Compile Include="Models\WCFModels\ArticleTransfer.cs" />
     <Compile Include="Repository\ArticleContext.cs" />
     <Compile Include="ArticleWcfService.svc.cs">
