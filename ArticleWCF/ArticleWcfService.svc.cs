@@ -2,6 +2,7 @@
 
 using ArticleWCF.Models.WCFModels;
 using ArticleWCF.Service;
+using System.Security.Principal;
 
 namespace ArticleWCF
 {

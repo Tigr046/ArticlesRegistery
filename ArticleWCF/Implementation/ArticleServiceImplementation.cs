@@ -21,7 +21,7 @@ namespace ArticleWCF.Implementation
         {
             if(articleContext.User.Any(x => x.Email == articleTransfer.AuthorEmail))
             {
-                return mapper.Map(articleTransfer);
+                return articleContext.Article.Add(mapper.Map(articleTransfer));
             }
             throw new Exception($"Пользователь с Email {articleTransfer.AuthorEmail} не найден");
         }

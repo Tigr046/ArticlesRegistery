@@ -5,7 +5,7 @@ using Articles.Models;
 using Articles.Models.RegistryModel;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using Articles.CustomAttribute;
 using System.Collections.Generic;
 
 namespace Articles.Controllers.Article
@@ -37,6 +37,7 @@ namespace Articles.Controllers.Article
             return View(article);
         }
 
+        [CustomAuthorization(Roles: "admin,user")]
         public IActionResult UpdateArticleFromView(int id)
         {
             if (service.ArticleExists(id))
@@ -47,6 +48,7 @@ namespace Articles.Controllers.Article
         }
 
         [HttpPost]
+        [CustomAuthorization(Roles: "admin,user")]
         public IActionResult UpdateArticle(ArticleViewModel articleViewModel)
         {
             if (service.ArticleExists(articleViewModel.Id))
@@ -72,7 +74,7 @@ namespace Articles.Controllers.Article
             return PartialView("_CommentsView", registryModel);
         }
 
-        [CustomAttribute.CustomAuthorization(Roles:"admin,user")]
+        [CustomAuthorization(Roles:"admin,user")]
         public IActionResult AddComment(CommentViewModel comment)
         {
             CommentDTO commentToAdd = mapper.Map<CommentViewModel, CommentDTO>(comment);
@@ -82,12 +84,14 @@ namespace Articles.Controllers.Article
             return ShowComments(comment.ArticleId);
         }
 
+        [CustomAuthorization(Roles: "admin,user")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [CustomAuthorization(Roles: "admin,user")]
         public IActionResult Create(ArticleViewModel article)
         {
             if (!ModelState.IsValid)
