@@ -6,6 +6,7 @@ namespace Articles.Models.Auth
     public class RegisterModel
     {
         [Required(ErrorMessage = "Не указан Email")]
+        [EmailAddress(ErrorMessage ="Некорректный формат почты")]
         public string Email { get; set; }
 
 
@@ -13,23 +14,24 @@ namespace Articles.Models.Auth
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Поле подтверждения пароля не заполнено")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Пароль введен неверно")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Поле день рождения обязательно для заполенния")]
+        [StringLength(50,MinimumLength = 3, ErrorMessage = "Имя должна содержать от 3 до 50 символов")]
         public string FirstName { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Поле день рождения обязательно для заполенния")]
+        [StringLength(50, MinimumLength = 3,ErrorMessage ="Фамилия должна содержать от 3 до 50 символов")]
         public string SecondName { get; set; }
 
         [StringLength(50)]
         public string Patronymic { get; set; }
 
-        [Required]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd/MM/yyyy}")]
+        [Required(ErrorMessage ="Поле день рождения обязательно для заполенния")]
+        [DisplayFormat(DataFormatString = "{dd/MM/yyyy}")]
         public DateTime Birthday { get; set; }
     }
 }
